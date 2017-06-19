@@ -9,6 +9,7 @@ m = length(y); % number of training examples
 
 % You need to return the following variables correctly 
 J = 0;
+
 grad = zeros(size(theta));
 
 % ====================== YOUR CODE HERE ======================
@@ -20,10 +21,20 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+hypothesis = sigmoid( X * theta );
 
+for i = 1 : m
+	J += -y(i) * log( hypothesis(i) ) - ( 1 - y(i) ) * log( 1 - hypothesis(i) );
+end
+J /= m;
 
-
-
+for j = 1 : size( theta )
+	grad(j) = 0;
+	for i = 1 : m
+		grad(j) += ( hypothesis(i) - y(i) ) * X(i,j);
+	end
+	grad(j) /= m;
+end
 
 
 
