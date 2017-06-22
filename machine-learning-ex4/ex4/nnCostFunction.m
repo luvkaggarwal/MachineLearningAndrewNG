@@ -62,23 +62,22 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+X = [ ones(m,1) X ];
+a = sigmoid( X * Theta1' );
+a = [ ones(m,1) a ];
+hypothesis = sigmoid( a * Theta2' );
 
+y1 = zeros( m , num_labels );
+one = ones( m , num_labels );
+for i = 1 : num_labels
+	y1( :,i ) = ( y == i );
+end
 
+J = sum( sum( -y1 .* log(hypothesis) - ( one - y1 ) .* log( one - hypothesis ) ) ) / m;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+tempTheta1 = Theta1(:,2:end);
+tempTheta2 = Theta2(:,2:end);
+J += ( sum( sum( tempTheta1.*tempTheta1 ) ) + sum( sum( tempTheta2.*tempTheta2 ) ) ) * lambda / ( 2 * m );
 
 % -------------------------------------------------------------
 
