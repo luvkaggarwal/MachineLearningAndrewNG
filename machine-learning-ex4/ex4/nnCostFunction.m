@@ -79,6 +79,12 @@ tempTheta1 = Theta1(:,2:end);
 tempTheta2 = Theta2(:,2:end);
 J += ( sum( sum( tempTheta1.*tempTheta1 ) ) + sum( sum( tempTheta2.*tempTheta2 ) ) ) * lambda / ( 2 * m );
 
+Delta3 = hypothesis - y1;
+Delta2 = ( Delta3 * Theta2 )(:,2:end) .* sigmoidGradient( X * Theta1' );
+
+Theta1_grad = Delta2' * X / m;
+Theta2_grad = Delta3' * a / m;
+
 % -------------------------------------------------------------
 
 % =========================================================================
