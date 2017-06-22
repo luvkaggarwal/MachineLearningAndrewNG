@@ -83,7 +83,9 @@ Delta3 = hypothesis - y1;
 Delta2 = ( Delta3 * Theta2 )(:,2:end) .* sigmoidGradient( X * Theta1' );
 
 Theta1_grad = Delta2' * X / m;
+Theta1_grad(:,2:end) += Theta1(:,2:end) * lambda / m;
 Theta2_grad = Delta3' * a / m;
+Theta2_grad(:,2:end) += Theta2(:,2:end) * lambda / m;
 
 % -------------------------------------------------------------
 
